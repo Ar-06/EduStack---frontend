@@ -22,13 +22,13 @@ export const AppRoutes = () => {
             <Route path="/login" element={<LoginPage />} />
             <Route path="/register" element={<RegisterPage />} />
             <Route path="/materials" element={<MaterialsPage />} />
+            <Route
+              path="/materials/material/:id"
+              element={<ReadMaterialPage />}
+            />
             <Route element={<ProtectedRoute />}>
               <Route path="/profile" element={<ProfilePage />} />
               <Route path="/upload" element={<UploadPage />} />
-              <Route
-                path="/materials/material/:id"
-                element={<ReadMaterialPage />}
-              />
               <Route path="/admin" element={<AdminPage />} />
               <Route path="/moderator" element={<ModeratorPage />} />
             </Route>
