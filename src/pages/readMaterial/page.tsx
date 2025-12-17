@@ -1,10 +1,26 @@
 import { HeaderHome } from "@/components/home/header-home";
 import { Button } from "@/components/ui/button";
+import axios from "axios";
+
 import { ArrowLeft, Download } from "lucide-react";
+import { useEffect, useState } from "react";
+
 import { useParams } from "react-router-dom";
 
+type Material = {
+  titulo: string;
+  ruta_archivo: string;
+};
 export const ReadMaterialPage = () => {
   const { id } = useParams();
+  const [material, setMaterial] = useState<Material | null>(null);
+
+  useEffect(() => {
+    axios
+      .get(`${import.meta.env.VITE_API_URL}/api/materials/view/${id}`)
+      .then((res) => setMaterial(res.data))
+      .catch(console.error);
+  }, [id]);
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -18,10 +34,7 @@ export const ReadMaterialPage = () => {
             </Button>
 
             <Button asChild>
-              <a
-                href={`http://localhost:3000/api/materials/download/${id}`}
-                target="_blank"
-              >
+              <a href={material?.ruta_archivo} target="_blank">
                 <Download className="h-4 w-4 mr-2" />
                 Descargar
               </a>
@@ -30,7 +43,7 @@ export const ReadMaterialPage = () => {
 
           <div className="w-full h-[80vh] border rounded-lg overflow-hidden">
             <iframe
-              src={`http://localhost:3000/api/materials/view/${id}`}
+              src={material?.ruta_archivo}
               className="w-full h-full"
               title="Lectura de material"
             />
