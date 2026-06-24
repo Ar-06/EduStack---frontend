@@ -16,7 +16,7 @@ export const Footer = () => {
             y educadores.
           </p>
           <p className="text-muted-foreground">
-            2025 © EduStack - By MEF Studio 🤓
+            2025 © EduStack - By Ardev 🤓
           </p>
         </div>
       </div>
